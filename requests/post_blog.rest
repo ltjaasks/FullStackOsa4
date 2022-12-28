@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Testataan blogeja ja käyttäjiä ilman likejä",
+  "author": "testi3",
+  "url": "toimii",
+  "likes": ""
+}
