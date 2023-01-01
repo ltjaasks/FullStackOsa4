@@ -39,6 +39,7 @@ beforeEach(async () => {
     blogObject.user = user
     await blogObject.save()
     blogObject = new Blog(helper.initialBlogs[1])
+    blogObject.user = user
     await blogObject.save()
 })
 

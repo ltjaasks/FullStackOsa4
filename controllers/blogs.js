@@ -17,7 +17,6 @@ blogsRouter.get('/', async (request, response) => {
   
 blogsRouter.post('/', userExtractor, async (request, response) => {
     const body = request.body
-    logger.info('KÄYTTÄJÄ', request.user)
 
     const user = request.user
     
@@ -49,11 +48,8 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
 blogsRouter.delete('/:id', userExtractor, async (request, response) => {
     const token = request.token
     const blog = await Blog.findById(request.params.id)
-    logger.info('käyttäjä', request.user.id)
-    logger.info(blog.user.toString())
 
     if (!token || (request.user.id != blog.user.toString())) {
-        logger.info('Poisto epäonnistui')
         return response.status(401).json({ error: 'No token or invalid user'})
     }
 
@@ -68,15 +64,12 @@ blogsRouter.put('/:id', async (request, response) => {
         title: body.title,
         author: body.author,
         url: body.url,
-        likes: body.likes
+        likes: body.likes 
     }
-    logger.info(blog)
-    logger.info('muutettava', request.params.id)
-    logger.info(await Blog.findById(request.params.id))
 
     const changedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+
     response.json(changedBlog)
-    logger.info(changedBlog)
 })
 
 module.exports = blogsRouter
